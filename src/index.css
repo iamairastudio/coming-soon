@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&family=Inter:wght@200;300;400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,154 +54,93 @@
     }
   }
 
-  .logo-glow {
-    /* Strong dark edge shadow for contrast against white sky */
-    filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.35))
-            drop-shadow(0 0 40px rgba(0, 0, 0, 0.2))
-            /* White halo radiating outward */
-            drop-shadow(0 0 60px rgba(255, 255, 255, 0.6))
-            drop-shadow(0 0 100px rgba(255, 255, 255, 0.35))
-            drop-shadow(0 0 160px rgba(255, 255, 255, 0.15));
-  }
-
-  /*
-    Sculptural Glass Capsule
-    Polished ice resting on black volcanic sand.
-    Luxury-fashion aesthetic: The Row, Jil Sander, moonlit coast.
-    Soft frosted transparency, barely-there moonlit reflections.
-  */
-  .liquid-glass-pill {
+  /* Floating Glass Bubble — editorial, sculptural, hovering */
+  .floating-bubble {
     position: relative;
-    display: inline-flex;
+    width: 280px;
+    height: 80px;
+    border-radius: 999px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 40px;
-    border-radius: 9999px;
-    overflow: hidden;
-    /* Deep, soft backdrop blur — 35px for that thick polished-glass density */
-    backdrop-filter: blur(35px) saturate(120%);
-    -webkit-backdrop-filter: blur(35px) saturate(120%);
-    /* Ghost-like transparency — barely perceptible cool tint */
-    background: linear-gradient(
-      175deg,
-      rgba(255, 255, 255, 0.06) 0%,
-      rgba(255, 255, 255, 0.02) 45%,
-      rgba(255, 255, 255, 0.01) 60%,
-      rgba(0, 0, 0, 0.04) 100%
-    );
-    /* Whisper-thin border — like the edge of a crystal lens */
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    /* Soft inner glow — moonlit luminosity from within */
-    box-shadow:
-      /* Top-edge specular highlight — barely there */
-      inset 0 0.5px 0.5px rgba(255, 255, 255, 0.35),
-      /* Soft inner atmospheric glow */
-      inset 0 0 24px rgba(255, 255, 255, 0.04),
-      /* Bottom-edge grounding shadow — subtle depth */
-      inset 0 -0.5px 0.5px rgba(0, 0, 0, 0.15),
-      /* Outer ethereal halo — diffused moonlight */
-      0 0 40px rgba(255, 255, 255, 0.04),
-      0 0 80px rgba(255, 255, 255, 0.02);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #f2efe9;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(245, 240, 230, 0.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    animation: float 6s ease-in-out infinite;
   }
 
-  /* Moonlit refraction layer — cool, atmospheric, barely visible */
-  .liquid-glass-highlight {
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    pointer-events: none;
-    /* Very faint top-to-bottom cool gradient — moonlight falling on glass */
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.10) 0%,
-      rgba(255, 255, 255, 0.03) 30%,
-      rgba(255, 255, 255, 0.00) 50%,
-      rgba(200, 210, 225, 0.02) 75%,
-      rgba(0, 0, 0, 0.06) 100%
-    );
-    mix-blend-mode: screen;
-  }
-
-  /* Faint curved rim light — top edge of the capsule */
-  .liquid-glass-highlight::before {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 20%;
-    right: 20%;
-    height: 0.5px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.35) 35%,
-      rgba(255, 255, 255, 0.45) 50%,
-      rgba(255, 255, 255, 0.35) 65%,
-      transparent 100%
-    );
-    border-radius: 9999px;
-  }
-
-  /* Specular micro-highlights — tiny ice-crystal glints on the glass surface */
-  .liquid-glass-sparkles {
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .liquid-glass-sparkles::before {
-    content: '';
-    position: absolute;
-    top: 30%;
-    left: 8%;
-    width: 1.5px;
-    height: 1.5px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 3px 0.5px rgba(255, 255, 255, 0.2);
-    animation: iceGlint1 5s ease-in-out infinite;
-  }
-
-  .liquid-glass-sparkles::after {
-    content: '';
-    position: absolute;
-    top: 65%;
-    right: 7%;
-    width: 1px;
-    height: 1px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 2px 0.5px rgba(255, 255, 255, 0.15);
-    animation: iceGlint2 6s ease-in-out infinite;
-  }
-
-  @media (min-width: 768px) {
-    .liquid-glass-pill {
-      padding: 16px 56px;
+  @keyframes float {
+    0% {
+      transform: translateY(0px) scale(1);
     }
-    .nav-link-glow {
-      font-size: 12px;
-      letter-spacing: 0.25em;
+    50% {
+      transform: translateY(-6px) scale(1.01);
+    }
+    100% {
+      transform: translateY(0px) scale(1);
     }
   }
 
-  @keyframes iceGlint1 {
-    0%, 100% { opacity: 0.15; }
-    50% { opacity: 0.6; }
+  /* Email input — underline style, elegant */
+  .email-underline {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(245, 240, 230, 0.25);
+    padding-bottom: 8px;
+    width: 320px;
+    transition: all 0.3s ease;
   }
 
-  @keyframes iceGlint2 {
-    0%, 100% { opacity: 0.1; }
-    60% { opacity: 0.45; }
+  .email-underline:focus-within {
+    border-bottom: 1px solid rgba(245, 240, 230, 0.7);
+  }
+
+  .email-underline input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f2efe9;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .email-underline input::placeholder {
+    color: rgba(242, 239, 233, 0.5);
+  }
+
+  .email-underline button {
+    background: transparent;
+    border: none;
+    color: rgba(242, 239, 233, 0.8);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .email-underline button:hover {
+    transform: translateX(3px);
   }
 
   /* Nav link with underline glow on hover */
   .nav-link-glow {
     position: relative;
+    font-family: 'Inter', sans-serif;
     font-size: 11px;
     letter-spacing: 0.2em;
-    color: #3a3a3a;
+    color: rgba(242, 239, 233, 0.55);
     text-transform: uppercase;
     font-weight: 400;
     transition: color 300ms ease;
@@ -227,32 +168,29 @@
   }
 
   .nav-link-glow:hover {
-    color: #5a5a5a;
+    color: rgba(242, 239, 233, 0.85);
   }
 
   .nav-link-glow:hover::after {
     width: 100%;
   }
 
-  /* Instagram icon — subtle outlined glow on hover */
-  .ig-icon-glow {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 300ms ease;
+  @media (min-width: 768px) {
+    .nav-link-glow {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+    }
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .floating-bubble {
+    width: 240px !important;
+    height: 72px !important;
   }
 
-  .ig-icon-glow:hover {
-    color: rgba(255, 255, 255, 1);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.3),
-      0 0 12px 2px rgba(255, 255, 255, 0.15),
-      0 0 24px 4px rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.05);
+  .email-underline {
+    width: 260px !important;
   }
 }
