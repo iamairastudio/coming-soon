@@ -147,15 +147,6 @@ export default function App() {
       {/* Floating fog animation */}
       <FogCanvas />
 
-      {/* Soft vignette */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 2,
-          background: 'radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.75) 100%)',
-        }}
-      />
-
       {/* Navigation */}
       <Navigation />
 
