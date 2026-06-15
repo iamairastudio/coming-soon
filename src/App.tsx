@@ -144,16 +144,10 @@ function EmailInput() {
 }
 
 export default function App() {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   return (
     <div
-      className={`relative w-full h-screen overflow-hidden ${mounted ? 'page-fade-in' : 'opacity-0'}`}
-      style={{ background: '#0b0b0c' }}
+      className="relative w-full h-screen overflow-hidden"
+      style={{ background: '#0b0b0c', animation: 'pageFadeIn 600ms ease-out' }}
     >
       {/* Background Image — dark sand with contrast */}
       <img
