@@ -97,19 +97,9 @@ function FogCanvas() {
 }
 
 function Navigation() {
-  const links = ['HOME', 'ABOUT', 'CONTACT']
-
   return (
-    <nav className="absolute top-6 md:top-8 left-0 right-0 flex justify-center items-center gap-10 md:gap-16 z-10">
-      {links.map((link) => (
-        <a
-          key={link}
-          href="#"
-          className="nav-link-glow"
-        >
-          {link}
-        </a>
-      ))}
+    <nav className="absolute top-6 md:top-8 left-0 right-0 flex justify-center items-center z-10">
+      <a href="#" className="nav-link-glow">CONTACT</a>
     </nav>
   )
 }
@@ -145,10 +135,7 @@ function EmailInput() {
 
 export default function App() {
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden"
-      style={{ background: '#0b0b0c', animation: 'pageFadeIn 600ms ease-out' }}
-    >
+    <div className="relative w-full h-screen overflow-hidden" style={{ background: '#0b0b0c' }}>
       {/* Background Image — dark sand with contrast */}
       <img
         src="/images/background.jpg"
