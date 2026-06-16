@@ -34,7 +34,7 @@ function FogCanvas() {
       const h = canvas.height
       const particles: FogParticle[] = []
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 2; i++) {
         particles.push({
           x: Math.random() * w * 1.5 - w * 0.25,
           y: Math.random() * h * 0.55,
@@ -141,7 +141,7 @@ export default function App() {
         src="/images/background.jpg"
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ filter: 'contrast(1.1) brightness(0.45)', transform: 'scale(1.05)' }}
+        style={{ filter: 'contrast(1.05) brightness(0.65)', transform: 'scale(1.05)' }}
       />
 
       {/* Floating fog animation */}
