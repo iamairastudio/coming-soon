@@ -34,7 +34,7 @@ function FogCanvas() {
       const h = canvas.height
       const particles: FogParticle[] = []
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 3; i++) {
         particles.push({
           x: Math.random() * w * 1.5 - w * 0.25,
           y: Math.random() * h * 0.55,
@@ -155,20 +155,6 @@ export default function App() {
         className="absolute inset-0 flex flex-col items-center justify-center text-center px-10"
         style={{ zIndex: 3 }}
       >
-        {/* Title */}
-        <h1
-          className="mb-1 opacity-95"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '52px',
-            fontWeight: 300,
-            letterSpacing: '2px',
-            color: '#f2efe9',
-          }}
-        >
-          The Look
-        </h1>
-
         {/* Subtitle */}
         <p
           className="uppercase opacity-60 mb-[60px]"
@@ -188,18 +174,7 @@ export default function App() {
         {/* Email Input */}
         <EmailInput />
 
-        {/* Micro Text */}
-        <p
-          className="mt-3 opacity-40"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '11px',
-            letterSpacing: '1px',
-            color: '#f2efe9',
-          }}
-        >
-          Be first to enter the collection
-        </p>
+
       </div>
 
       {/* Footer Brand */}
