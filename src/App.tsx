@@ -165,7 +165,7 @@ export default function App() {
             color: '#f2efe9',
           }}
         >
-          Modern Mystique
+          ARCHETYPE — 000 : THE BIRTH
         </p>
 
         {/* Floating Glass Bubble */}
