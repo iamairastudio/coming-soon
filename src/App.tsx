@@ -141,7 +141,7 @@ export default function App() {
         src="/images/background.jpg"
         alt=""
         className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ filter: 'contrast(1.05) brightness(0.65)', transform: 'scale(1.05)' }}
+        style={{ filter: 'contrast(1.02) brightness(0.75)', transform: 'scale(1.02)' }}
       />
 
       {/* Floating fog animation */}
