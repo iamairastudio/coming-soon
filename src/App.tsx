@@ -34,7 +34,7 @@ function FogCanvas() {
       const h = canvas.height
       const particles: FogParticle[] = []
 
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 0; i++) {
         particles.push({
           x: Math.random() * w * 1.5 - w * 0.25,
           y: Math.random() * h * 0.55,
