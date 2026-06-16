@@ -96,11 +96,37 @@ function FogCanvas() {
   )
 }
 
-function Navigation() {
+function BrandMark() {
   return (
-    <nav className="absolute top-6 md:top-8 left-0 right-0 flex justify-center items-center z-10">
-      <a href="#" className="nav-link-glow">CONTACT</a>
-    </nav>
+    <img
+      src="/images/logo-mark.png"
+      alt=""
+      className="absolute z-10 top-6 left-6 md:top-8 md:left-8"
+      style={{
+        width: '28px',
+        height: 'auto',
+        opacity: 0.9,
+      }}
+    />
+  )
+}
+
+function BrandLogo() {
+  return (
+    <a
+      href="#"
+      className="absolute z-10 uppercase transition-opacity duration-300 hover:opacity-100 top-7 right-6 md:top-9 md:right-8"
+      style={{
+        fontFamily: "'Inter', sans-serif",
+        fontWeight: 300,
+        fontSize: '12px',
+        letterSpacing: '0.35em',
+        color: 'rgba(255, 255, 255, 0.72)',
+        opacity: 0.72,
+      }}
+    >
+      iamaira
+    </a>
   )
 }
 
@@ -205,8 +231,11 @@ export default function App() {
       {/* Floating fog animation */}
       <FogCanvas />
 
-      {/* Navigation */}
-      <Navigation />
+      {/* Brand mark — top-left watermark */}
+      <BrandMark />
+
+      {/* Brand logo — top-right text */}
+      <BrandLogo />
 
       {/* Main Content */}
       <div
