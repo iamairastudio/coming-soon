@@ -101,8 +101,10 @@ function BrandMark() {
     <img
       src="/images/logo-mark.png"
       alt=""
-      className="absolute z-10 top-6 left-6 md:top-8 md:left-8"
+      className="absolute z-10"
       style={{
+        top: '32px',
+        left: '32px',
         width: '28px',
         height: 'auto',
         opacity: 0.9,
@@ -111,22 +113,11 @@ function BrandMark() {
   )
 }
 
-function BrandLogo() {
+function Navigation() {
   return (
-    <a
-      href="#"
-      className="absolute z-10 uppercase transition-opacity duration-300 hover:opacity-100 top-7 right-6 md:top-9 md:right-8"
-      style={{
-        fontFamily: "'Inter', sans-serif",
-        fontWeight: 300,
-        fontSize: '12px',
-        letterSpacing: '0.35em',
-        color: 'rgba(255, 255, 255, 0.72)',
-        opacity: 0.72,
-      }}
-    >
-      iamaira
-    </a>
+    <nav className="absolute z-10" style={{ top: '36px', right: '32px' }}>
+      <a href="#" className="nav-link-glow">CONTACT</a>
+    </nav>
   )
 }
 
@@ -234,8 +225,8 @@ export default function App() {
       {/* Brand mark — top-left watermark */}
       <BrandMark />
 
-      {/* Brand logo — top-right text */}
-      <BrandLogo />
+      {/* Navigation — CONTACT top-right */}
+      <Navigation />
 
       {/* Main Content */}
       <div
