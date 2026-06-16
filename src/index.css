@@ -37,6 +37,12 @@
   body {
     @apply bg-black text-white antialiased;
     overflow: hidden;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.20);
+  }
+
+  /* Global text color — 82% white for subtle depth */
+  body, p, span, a, h1, h2, h3, h4, h5, h6, label, input, button, div {
+    color: rgba(255, 255, 255, 0.82);
   }
 }
 
@@ -54,9 +60,9 @@
     font-size: 12px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #f2efe9;
+    color: rgba(255, 255, 255, 0.82);
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(245, 240, 230, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -81,14 +87,14 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid rgba(245, 240, 230, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     padding-bottom: 8px;
     width: 320px;
     transition: all 0.3s ease;
   }
 
   .email-underline:focus-within {
-    border-bottom: 1px solid rgba(245, 240, 230, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   }
 
   .email-underline input {
@@ -96,20 +102,20 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #f2efe9;
+    color: rgba(255, 255, 255, 0.82);
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     letter-spacing: 0.5px;
   }
 
   .email-underline input::placeholder {
-    color: rgba(242, 239, 233, 0.5);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .email-underline button {
     background: transparent;
     border: none;
-    color: rgba(242, 239, 233, 0.8);
+    color: rgba(255, 255, 255, 0.82);
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s ease;
@@ -127,7 +133,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     letter-spacing: 0.2em;
-    color: rgba(242, 239, 233, 0.55);
+    color: rgba(255, 255, 255, 0.55);
     text-transform: uppercase;
     font-weight: 400;
     transition: color 300ms ease;
@@ -155,7 +161,7 @@
   }
 
   .nav-link-glow:hover {
-    color: rgba(242, 239, 233, 0.85);
+    color: rgba(255, 255, 255, 0.82);
   }
 
   .nav-link-glow:hover::after {

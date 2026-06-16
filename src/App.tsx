@@ -220,7 +220,7 @@ export default function App() {
             fontFamily: "'Inter', sans-serif",
             fontSize: '14px',
             letterSpacing: '3px',
-            color: '#f2efe9',
+            color: 'rgba(255, 255, 255, 0.82)',
           }}
         >
           ARCHETYPE — 000 : THE BIRTH
@@ -242,7 +242,7 @@ export default function App() {
           fontFamily: "'Inter', sans-serif",
           fontSize: '10px',
           letterSpacing: '2px',
-          color: '#f2efe9',
+          color: 'rgba(255, 255, 255, 0.82)',
           zIndex: 3,
         }}
       >
