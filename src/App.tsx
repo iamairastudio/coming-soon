@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Volume2, VolumeX } from 'lucide-react'
 
 interface FogParticle {
   x: number
@@ -133,6 +133,64 @@ function EmailInput() {
   )
 }
 
+function WaveAudio() {
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [playing, setPlaying] = useState(false)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    audio.volume = 0.08
+
+    const tryPlay = () => {
+      audio.play().then(() => {
+        setPlaying(true)
+      }).catch(() => {
+        // Browser blocked autoplay — wait for user interaction
+        setPlaying(false)
+      })
+    }
+
+    tryPlay()
+
+    const handleInteraction = () => {
+      if (audio.paused) {
+        audio.play().then(() => setPlaying(true)).catch(() => {})
+      }
+      document.removeEventListener('click', handleInteraction)
+    }
+
+    document.addEventListener('click', handleInteraction)
+    return () => document.removeEventListener('click', handleInteraction)
+  }, [])
+
+  const toggle = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audio.paused) {
+      audio.play().then(() => setPlaying(true)).catch(() => {})
+    } else {
+      audio.pause()
+      setPlaying(false)
+    }
+  }
+
+  return (
+    <>
+      <audio ref={audioRef} src="/audio/waves.mp3" loop preload="auto" />
+      <button
+        onClick={toggle}
+        aria-label={playing ? 'Mute waves' : 'Play waves'}
+        className="absolute bottom-6 right-6 z-20 opacity-30 hover:opacity-70 transition-opacity duration-300"
+        style={{ color: '#f2efe9' }}
+      >
+        {playing ? <Volume2 size={16} strokeWidth={1} /> : <VolumeX size={16} strokeWidth={1} />}
+      </button>
+    </>
+  )
+}
+
 export default function App() {
   return (
     <div className="relative w-full h-screen overflow-hidden" style={{ background: '#0b0b0c' }}>
@@ -190,6 +248,9 @@ export default function App() {
       >
         iamaira studio
       </div>
+
+      {/* Ambient wave sounds */}
+      <WaveAudio />
     </div>
   )
 }
