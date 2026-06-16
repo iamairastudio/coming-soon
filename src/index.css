@@ -37,7 +37,9 @@
   body {
     @apply bg-black text-white antialiased;
     overflow: hidden;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.20);
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 0.08),
+      0 0 24px rgba(255, 255, 255, 0.04);
   }
 
   /* Global text color — 82% white for subtle depth */
