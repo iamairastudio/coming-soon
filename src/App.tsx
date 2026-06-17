@@ -133,7 +133,7 @@ function GlitchText() {
       }, 90)
     }
 
-    const timeout = setTimeout(startAnimation, 800)
+    const timeout = setTimeout(startAnimation, 100)
     return () => {
       clearTimeout(timeout)
       clearInterval(interval)
