@@ -99,6 +99,7 @@ function FogCanvas() {
 
 function GlitchText() {
   const [text, setText] = useState('\u00A0')
+  const [opacity, setOpacity] = useState(0)
   const target = 'ARCHETYPE \u2014 000'
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
@@ -107,6 +108,7 @@ function GlitchText() {
     let interval: ReturnType<typeof setInterval>
 
     const startAnimation = () => {
+      setOpacity(1)
       interval = setInterval(() => {
         const next = target
           .split('')
@@ -131,7 +133,7 @@ function GlitchText() {
       }, 90)
     }
 
-    const timeout = setTimeout(startAnimation, 1200)
+    const timeout = setTimeout(startAnimation, 800)
     return () => {
       clearTimeout(timeout)
       clearInterval(interval)
@@ -140,12 +142,14 @@ function GlitchText() {
 
   return (
     <p
-      className="uppercase opacity-60 mb-[60px]"
+      className="uppercase mb-[60px]"
       style={{
         fontFamily: "'Inter', sans-serif",
         fontSize: '14px',
         letterSpacing: '3px',
         color: 'rgba(255, 255, 255, 0.82)',
+        opacity: opacity,
+        transition: 'opacity 2.4s ease',
       }}
     >
       {text}
