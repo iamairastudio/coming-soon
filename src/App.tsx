@@ -98,46 +98,33 @@ function FogCanvas() {
 }
 
 function GlitchText() {
-  const [text, setText] = useState('\u00A0')
-  const [opacity, setOpacity] = useState(0)
   const target = 'ARCHETYPE \u2014 000'
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  const [text, setText] = useState(target)
 
   useEffect(() => {
     let iteration = 0
-    let interval: ReturnType<typeof setInterval>
 
-    const startAnimation = () => {
-      setOpacity(1)
-      interval = setInterval(() => {
-        const next = target
-          .split('')
-          .map((letter, index) => {
-            if (letter === ' ' || letter === '\u2014') {
-              return letter
-            }
-            if (index < iteration) {
-              return target[index]
-            }
-            return chars[Math.floor(Math.random() * chars.length)]
-          })
-          .join('')
+    const interval = setInterval(() => {
+      const next = target
+        .split('')
+        .map((letter, index) => {
+          if (letter === ' ' || letter === '\u2014') return letter
+          if (index < iteration) return target[index]
+          return chars[Math.floor(Math.random() * chars.length)]
+        })
+        .join('')
 
-        setText(next)
-        iteration += 1 / 3
+      setText(next)
+      iteration += 1 / 3
 
-        if (iteration >= target.length) {
-          clearInterval(interval)
-          setText(target)
-        }
-      }, 90)
-    }
+      if (iteration >= target.length) {
+        clearInterval(interval)
+        setText(target)
+      }
+    }, 90)
 
-    const timeout = setTimeout(startAnimation, 100)
-    return () => {
-      clearTimeout(timeout)
-      clearInterval(interval)
-    }
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -148,8 +135,6 @@ function GlitchText() {
         fontSize: '14px',
         letterSpacing: '3px',
         color: 'rgba(255, 255, 255, 0.82)',
-        opacity: opacity,
-        transition: 'opacity 2.4s ease',
       }}
     >
       {text}
