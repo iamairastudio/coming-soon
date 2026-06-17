@@ -115,7 +115,7 @@ function BrandMark() {
 
 function Navigation() {
   return (
-    <nav className="absolute z-10" style={{ top: '36px', right: '32px' }}>
+    <nav className="absolute z-10" style={{ top: '32px', right: '32px' }}>
       <a href="#" className="nav-link-glow">CONTACT</a>
     </nav>
   )
