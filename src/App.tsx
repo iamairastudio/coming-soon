@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ArrowRight, Volume2, VolumeX } from 'lucide-react'
+import { ContactModal } from './components/ContactModal'
 
 interface FogParticle {
   x: number
@@ -113,10 +114,16 @@ function BrandMark() {
   )
 }
 
-function Navigation() {
+function Navigation({ onOpenContact }: { onOpenContact: () => void }) {
   return (
     <nav className="absolute z-10" style={{ top: '32px', right: '32px' }}>
-      <a href="#" className="nav-link-glow">CONTACT</a>
+      <button
+        onClick={onOpenContact}
+        className="nav-link-glow"
+        style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+      >
+        CONTACT
+      </button>
     </nav>
   )
 }
@@ -209,6 +216,8 @@ function WaveAudio() {
 }
 
 export default function App() {
+  const [contactOpen, setContactOpen] = useState(false)
+
   return (
     <div className="relative w-full h-screen overflow-hidden" style={{ background: '#0b0b0c' }}>
       {/* Background Image — dark sand with contrast */}
@@ -226,7 +235,7 @@ export default function App() {
       <BrandMark />
 
       {/* Navigation — CONTACT top-right */}
-      <Navigation />
+      <Navigation onOpenContact={() => setContactOpen(true)} />
 
       {/* Main Content */}
       <div
@@ -271,6 +280,9 @@ export default function App() {
 
       {/* Ambient wave sounds */}
       <WaveAudio />
+
+      {/* Contact Modal */}
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
   )
 }
