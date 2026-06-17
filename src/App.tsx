@@ -97,6 +97,62 @@ function FogCanvas() {
   )
 }
 
+function GlitchText() {
+  const [text, setText] = useState('\u00A0')
+  const target = 'ARCHETYPE \u2014 000'
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+  useEffect(() => {
+    let iteration = 0
+    let interval: ReturnType<typeof setInterval>
+
+    const startAnimation = () => {
+      interval = setInterval(() => {
+        const next = target
+          .split('')
+          .map((letter, index) => {
+            if (letter === ' ' || letter === '\u2014') {
+              return letter
+            }
+            if (index < iteration) {
+              return target[index]
+            }
+            return chars[Math.floor(Math.random() * chars.length)]
+          })
+          .join('')
+
+        setText(next)
+        iteration += 1 / 3
+
+        if (iteration >= target.length) {
+          clearInterval(interval)
+          setText(target)
+        }
+      }, 90)
+    }
+
+    const timeout = setTimeout(startAnimation, 1200)
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+  }, [])
+
+  return (
+    <p
+      className="uppercase opacity-60 mb-[60px]"
+      style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '14px',
+        letterSpacing: '3px',
+        color: 'rgba(255, 255, 255, 0.82)',
+      }}
+    >
+      {text}
+    </p>
+  )
+}
+
 function BrandMark() {
   return (
     <img
@@ -242,18 +298,8 @@ export default function App() {
         className="absolute inset-0 flex flex-col items-center justify-center text-center px-10"
         style={{ zIndex: 3 }}
       >
-        {/* Subtitle */}
-        <p
-          className="uppercase opacity-60 mb-[60px]"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '14px',
-            letterSpacing: '3px',
-            color: 'rgba(255, 255, 255, 0.82)',
-          }}
-        >
-          ARCHETYPE — 000
-        </p>
+        {/* Glitch subtitle */}
+        <GlitchText />
 
         {/* Floating Glass Bubble */}
         <FloatingBubble />
