@@ -252,7 +252,7 @@ export default function App() {
             color: 'rgba(255, 255, 255, 0.82)',
           }}
         >
-          ARCHETYPE — 000 : THE BIRTH
+          ARCHETYPE — 000
         </p>
 
         {/* Floating Glass Bubble */}
