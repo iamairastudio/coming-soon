@@ -85,6 +85,7 @@
 
   /* Email input — underline style, elegant */
   .email-underline {
+    position: relative;
     margin-top: 28px;
     display: flex;
     align-items: center;
@@ -95,8 +96,37 @@
     transition: all 0.3s ease;
   }
 
+  .email-underline::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1.5px;
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.8) 30%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0.8) 70%,
+      transparent 100%
+    );
+    box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.4);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    pointer-events: none;
+  }
+
+  .email-underline:hover::after {
+    width: 100%;
+  }
+
   .email-underline:focus-within {
     border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .email-underline:focus-within::after {
+    width: 100%;
   }
 
   .email-underline input {
