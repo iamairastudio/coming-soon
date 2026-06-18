@@ -67,12 +67,14 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
       <div
         className="relative w-[90%] max-w-[420px]"
         style={{
-          background: 'rgba(20, 20, 20, 0.95)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          borderRadius: '20px',
+          background: 'rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(255, 255, 255, 0.25)',
+          borderRadius: '999px',
           padding: '2.5rem',
           animation: 'slideUp 0.4s ease',
-          boxShadow: '0 25px 80px rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -173,19 +175,20 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                     width: '100%',
                     padding: '0.9rem 1rem',
                     background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '10px',
-                    color: '#fff',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '999px',
+                    color: 'rgba(255,255,255,0.92)',
                     fontSize: '0.95rem',
                     outline: 'none',
                     transition: 'all 0.3s',
+                    backdropFilter: 'blur(8px)',
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'
                     e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
                   }}
                 />
@@ -215,21 +218,22 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                     minHeight: '120px',
                     padding: '0.9rem 1rem',
                     background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '10px',
-                    color: '#fff',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '20px',
+                    color: 'rgba(255,255,255,0.92)',
                     fontSize: '0.95rem',
                     outline: 'none',
                     transition: 'all 0.3s',
                     resize: 'vertical',
                     fontFamily: 'inherit',
+                    backdropFilter: 'blur(8px)',
                   }}
                   onFocus={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
                   }}
                   onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'
                     e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
                   }}
                 />
@@ -242,16 +246,28 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                   width: '100%',
                   padding: '1rem',
                   marginTop: '0.5rem',
-                  background: '#fff',
-                  color: '#000',
-                  border: 'none',
-                  borderRadius: '10px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: 'rgba(255, 255, 255, 0.92)',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  borderRadius: '999px',
                   fontSize: '0.9rem',
-                  fontWeight: 500,
-                  letterSpacing: '0.05em',
+                  fontWeight: 400,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
                   cursor: status === 'sending' ? 'not-allowed' : 'pointer',
-                  opacity: status === 'sending' ? 0.6 : 1,
+                  opacity: status === 'sending' ? 0.5 : 1,
                   transition: 'all 0.3s',
+                  backdropFilter: 'blur(8px)',
+                }}
+                onMouseEnter={(e) => {
+                  if (status !== 'sending') {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)'
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)'
                 }}
               >
                 {status === 'sending' ? 'Sending...' : 'Send Message'}
