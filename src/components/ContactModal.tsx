@@ -69,7 +69,7 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
         style={{
           background: 'rgba(255, 255, 255, 0.06)',
           border: '1px solid rgba(255, 255, 255, 0.25)',
-          borderRadius: '999px',
+          borderRadius: '20px',
           padding: '2.5rem',
           animation: 'slideUp 0.4s ease',
           backdropFilter: 'blur(14px)',
