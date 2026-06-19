@@ -1,110 +1,16 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, memo, lazy, Suspense } from 'react'
 import { ArrowRight, Volume2, VolumeX } from 'lucide-react'
-import { ContactModal } from './components/ContactModal'
 
-interface FogParticle {
-  x: number
-  y: number
-  radiusX: number
-  radiusY: number
-  opacity: number
-  speedX: number
-  speedY: number
-  phase: number
-}
+const ContactModal = lazy(() => import('./components/ContactModal'))
 
-function FogCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const particlesRef = useRef<FogParticle[]>([])
-  const animRef = useRef<number>(0)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      initParticles()
-    }
-
-    const initParticles = () => {
-      const w = canvas.width
-      const h = canvas.height
-      const particles: FogParticle[] = []
-
-      for (let i = 0; i < 0; i++) {
-        particles.push({
-          x: Math.random() * w * 1.5 - w * 0.25,
-          y: Math.random() * h * 0.55,
-          radiusX: 150 + Math.random() * 400,
-          radiusY: 40 + Math.random() * 120,
-          opacity: 0.02 + Math.random() * 0.06,
-          speedX: 0.05 + Math.random() * 0.15,
-          speedY: -0.01 + Math.random() * 0.03,
-          phase: Math.random() * Math.PI * 2,
-        })
-      }
-      particlesRef.current = particles
-    }
-
-    resize()
-    window.addEventListener('resize', resize)
-
-    const animate = (time: number) => {
-      const w = canvas.width
-      const h = canvas.height
-      ctx.clearRect(0, 0, w, h)
-
-      for (const p of particlesRef.current) {
-        p.x += p.speedX
-        p.y += p.speedY + Math.sin(time * 0.0003 + p.phase) * 0.02
-
-        if (p.x - p.radiusX > w) p.x = -p.radiusX
-        if (p.x + p.radiusX < 0) p.x = w + p.radiusX
-        if (p.y > h * 0.65) p.y = -p.radiusY
-        if (p.y < -p.radiusY) p.y = h * 0.65
-
-        ctx.save()
-        ctx.globalAlpha = p.opacity
-        ctx.filter = 'blur(60px)'
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'
-        ctx.beginPath()
-        ctx.ellipse(p.x, p.y, p.radiusX, p.radiusY, 0, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
-      }
-
-      animRef.current = requestAnimationFrame(animate)
-    }
-
-    animRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      window.removeEventListener('resize', resize)
-      cancelAnimationFrame(animRef.current)
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 1 }}
-    />
-  )
-}
-
-function GlitchText() {
+/* ── Glitch Text ── */
+const GlitchText = memo(function GlitchText() {
   const target = 'ARCHETYPE \u2014 000'
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   const [text, setText] = useState(target)
 
   useEffect(() => {
     let iteration = 0
-
     const interval = setInterval(() => {
       const next = target
         .split('')
@@ -140,14 +46,16 @@ function GlitchText() {
       {text}
     </p>
   )
-}
+})
 
-function BrandMark() {
+/* ── Brand Mark ── */
+const BrandMark = memo(function BrandMark() {
   return (
     <img
       src="/images/logo-mark.png"
       alt=""
       className="absolute z-10"
+      draggable={false}
       style={{
         top: '32px',
         left: '32px',
@@ -157,9 +65,10 @@ function BrandMark() {
       }}
     />
   )
-}
+})
 
-function Navigation({ onOpenContact }: { onOpenContact: () => void }) {
+/* ── Navigation ── */
+const Navigation = memo(function Navigation({ onOpenContact }: { onOpenContact: () => void }) {
   return (
     <nav className="absolute z-10" style={{ top: '32px', right: '32px' }}>
       <button
@@ -171,17 +80,19 @@ function Navigation({ onOpenContact }: { onOpenContact: () => void }) {
       </button>
     </nav>
   )
-}
+})
 
-function FloatingBubble() {
+/* ── Floating Bubble ── */
+const FloatingBubble = memo(function FloatingBubble() {
   return (
     <div className="floating-bubble">
       COMING SOON
     </div>
   )
-}
+})
 
-function EmailInput() {
+/* ── Email Input ── */
+const EmailInput = memo(function EmailInput() {
   const [email, setEmail] = useState('')
 
   return (
@@ -192,41 +103,28 @@ function EmailInput() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button
-        type="button"
-        aria-label="Submit email"
-      >
+      <button type="button" aria-label="Submit email">
         <ArrowRight size={18} strokeWidth={1.5} />
       </button>
     </div>
   )
-}
+})
 
-function WaveAudio() {
+/* ── Wave Audio ── */
+const WaveAudio = memo(function WaveAudio() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
+  const interacted = useRef(false)
 
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
-
     audio.volume = 0.08
 
-    const tryPlay = () => {
-      audio.play().then(() => {
-        setPlaying(true)
-      }).catch(() => {
-        // Browser blocked autoplay — wait for user interaction
-        setPlaying(false)
-      })
-    }
-
-    tryPlay()
-
     const handleInteraction = () => {
-      if (audio.paused) {
-        audio.play().then(() => setPlaying(true)).catch(() => {})
-      }
+      if (interacted.current) return
+      interacted.current = true
+      audio.play().then(() => setPlaying(true)).catch(() => {})
       document.removeEventListener('click', handleInteraction)
     }
 
@@ -247,25 +145,28 @@ function WaveAudio() {
 
   return (
     <>
-      <audio ref={audioRef} src="/audio/waves.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/audio/waves.mp3" loop preload="metadata" />
       <button
         onClick={toggle}
         aria-label={playing ? 'Mute waves' : 'Play waves'}
         className="absolute bottom-6 right-6 z-20 opacity-30 hover:opacity-70 transition-opacity duration-300"
-        style={{ color: '#f2efe9' }}
+        style={{ color: 'rgba(255, 255, 255, 0.82)' }}
       >
         {playing ? <Volume2 size={16} strokeWidth={1} /> : <VolumeX size={16} strokeWidth={1} />}
       </button>
     </>
   )
-}
+})
 
+/* ── Main App ── */
 export default function App() {
   const [contactOpen, setContactOpen] = useState(false)
+  const openContact = useCallback(() => setContactOpen(true), [])
+  const closeContact = useCallback(() => setContactOpen(false), [])
 
   return (
     <div className="relative w-full h-screen overflow-hidden" style={{ background: '#0b0b0c' }}>
-      {/* Background Image — dark sand with contrast */}
+      {/* Background Image — loads instantly via CSS on body too */}
       <img
         src="/images/background.jpg"
         alt=""
@@ -274,30 +175,17 @@ export default function App() {
         style={{ filter: 'contrast(1.02) brightness(0.75)', transform: 'scale(1.02)' }}
       />
 
-      {/* Floating fog animation */}
-      <FogCanvas />
-
       {/* Brand mark — top-left watermark */}
       <BrandMark />
 
       {/* Navigation — CONTACT top-right */}
-      <Navigation onOpenContact={() => setContactOpen(true)} />
+      <Navigation onOpenContact={openContact} />
 
       {/* Main Content */}
-      <div
-        className="absolute inset-0 flex flex-col items-center justify-center text-center px-10"
-        style={{ zIndex: 3 }}
-      >
-        {/* Glitch subtitle */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10" style={{ zIndex: 3 }}>
         <GlitchText />
-
-        {/* Floating Glass Bubble */}
         <FloatingBubble />
-
-        {/* Email Input */}
         <EmailInput />
-
-
       </div>
 
       {/* Footer Brand */}
@@ -317,8 +205,12 @@ export default function App() {
       {/* Ambient wave sounds */}
       <WaveAudio />
 
-      {/* Contact Modal */}
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      {/* Contact Modal — lazy loaded */}
+      {contactOpen && (
+        <Suspense fallback={null}>
+          <ContactModal open={contactOpen} onClose={closeContact} />
+        </Suspense>
+      )}
     </div>
   )
 }

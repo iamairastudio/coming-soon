@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, memo } from 'react'
 
-export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+const ContactModal = memo(function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -291,4 +291,6 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
       </div>
     </div>
   )
-}
+})
+
+export default ContactModal
